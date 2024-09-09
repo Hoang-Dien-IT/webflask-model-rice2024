@@ -1,0 +1,140 @@
+/* Cấu trúc chung */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+/* Cấu trúc bố cục */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+/* Phần giới thiệu */
+.intro {
+    width: 40%;
+    background-color: #e9f7ef;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.intro h2 {
+    font-size: 24px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Form nhập liệu */
+form {
+    width: 55%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="text"]:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.field-description {
+    font-size: 12px;
+    color: #666;
+    margin-top: 3px;
+}
+
+/* Kết quả và lỗi */
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e9f7ef;
+    border-left: 5px solid #28a745;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #333;
+    transition: background-color 0.3s ease, border-left-color 0.3s ease;
+}
+
+.result:hover {
+    background-color: #d4edda;
+    border-left-color: #218838;
+}
+
+.result strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}

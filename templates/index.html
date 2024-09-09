@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Grain Classification</title>
+    <link rel="stylesheet" href="static/styles.css"> <!-- Liên kết tệp CSS -->
+    <script src="static/scripts.js" defer></script> <!-- Liên kết tệp JavaScript -->
+</head>
+<body>
+    <div class="container">
+        <h1>Rice Grain Classification</h1>
+
+        <div class="content">
+            <!-- Phần giải thích -->
+            <section class="intro">
+                <h2>Giới thiệu</h2>
+                <p>
+                    Trang web này sử dụng các thuật toán học máy để phân loại hạt gạo dựa trên các thuộc tính hình học của chúng.
+                    Khi bạn nhập các thông số như diện tích, chu vi, chiều dài trục chính, chiều dài trục phụ, độ lệch tâm, diện tích bao phủ và tỷ lệ mở rộng của hạt gạo, hệ thống sẽ phân tích dữ liệu và đưa ra dự đoán về loại hạt gạo.
+                </p>
+                <p>
+                    Hệ thống phân loại có thể giúp bạn nhận diện hạt gạo thuộc loại nào trong hai loại chính: Class C và Class O. Đây là công cụ hữu ích cho nghiên cứu, phân tích chất lượng gạo, hoặc các ứng dụng liên quan đến nông nghiệp và thực phẩm.
+                </p>
+            </section>
+
+            <!-- Form nhập liệu -->
+            <form action="/predict" method="post" onsubmit="return validateForm()">
+                <label for="area">Area:</label>
+                <small class="field-description">
+                    Diện tích của hạt gạo, được đo lường bằng số pixel chiếm bởi hạt gạo trong hình ảnh.
+                </small>
+                <input type="text" id="area" name="area" required placeholder="Vui lòng nhập vào (pixel)">
+
+                <label for="perimeter">Perimeter:</label>
+                <small class="field-description">
+                    Chu vi của hạt gạo, được đo lường bằng tổng chiều dài của đường biên xung quanh hạt gạo.
+                </small>
+                <input type="text" id="perimeter" name="perimeter" required placeholder="Vui lòng nhập (pixel)">
+
+                <label for="major_axis_length">Major Axis Length:</label>
+                <small class="field-description">
+                    Chiều dài trục chính của hạt gạo, được đo lường bằng đơn vị pixel.
+                </small>
+                <input type="text" id="major_axis_length" name="major_axis_length" required placeholder="Vui lòng nhập vào (pixel)">
+
+                <label for="minor_axis_length">Minor Axis Length:</label>
+                <small class="field-description">
+                    Chiều dài trục phụ của hạt gạo, được đo lường bằng đơn vị pixel.
+                </small>
+                <input type="text" id="minor_axis_length" name="minor_axis_length" required placeholder="Vui lòng nhập vào (pixel)">
+
+                <label for="eccentricity">Eccentricity:</label>
+                <small class="field-description">
+                    Độ lệch tâm của hạt gạo, là tỷ lệ giữa khoảng cách từ tâm đến tiêu điểm và chiều dài trục chính. Giá trị này nằm trong khoảng từ 0 đến 1.
+                </small>
+                <input type="text" id="eccentricity" name="eccentricity" required placeholder="Vui lòng nhập trong khoản 0 đến 1">
+
+                <label for="convex_area">Convex Area:</label>
+                <small class="field-description">
+                    Diện tích bao phủ của hạt gạo được tính toán bằng cách vẽ một đa giác lồi xung quanh hạt gạo, đo lường bằng pixel.
+                </small>
+                <input type="text" id="convex_area" name="convex_area" required placeholder="Vui lòng nhập vào (pixel)">
+
+                <label for="extent">Extent:</label>
+                <small class="field-description">
+                    Tỷ lệ giữa diện tích của hạt gạo và diện tích của hình chữ nhật bao quanh hạt gạo. Giá trị này nằm trong khoảng từ 0 đến 1.
+                </small>
+                <input type="text" id="extent" name="extent" required placeholder="Vui lòng nhập trong khoản 0 đến 1">
+
+                <input type="submit" value="Predict">
+            </form>
+        </div>
+
+        {% if class_0_prob is not none and class_1_prob is not none %}
+            <div class="result">
+                <strong>Class C Probability:</strong> {{ class_0_prob | round(2) }}%<br>
+                <strong>Class O Probability:</strong> {{ class_1_prob | round(2) }}%
+            </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
