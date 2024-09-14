@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Tải model và scaler đã lưu
 model = joblib.load('random_forest_model_rice.pkl')
-df_cleaned = pd.read_csv("../normalize_datasets/standardized-rice.csv")
+df_cleaned = pd.read_csv("standardized-rice.csv")
 # scaler = joblib.load('scaler_rice.pkl')  # scaler đã được huấn luyện trên tập dữ liệu gốc
 
 @app.route('/')
