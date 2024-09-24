@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 # Tải model và scaler đã lưu
 model = joblib.load('random_forest_model_rice.pkl')
-df_cleaned = pd.read_csv("standardized-rice.csv")
-# scaler = joblib.load('scaler_rice.pkl')  # scaler đã được huấn luyện trên tập dữ liệu gốc
+df_cleaned = pd.read_excel("Rice2024_cleaned.xlsx", engine='openpyxl')
+
 
 @app.route('/')
 def home():
@@ -40,14 +40,11 @@ def predict():
         eccentricity = (eccentricity - Eccentricity[0]) / (Eccentricity[1] - Eccentricity[0])
         extent = (extent - Extent[0]) / (Extent[1] - Extent[0])
 
-        # Tạo mảng numpy từ dữ liệu đầu vào
+
         scaled_data = []
         features = np.array([[area, perimeter, major_axis_length, minor_axis_length, eccentricity, extent]])
         print(features)
-        # # Áp dụng MinMaxScaler
-        # features_scaled = scaler.transform(features)
-        # print(features_scaled)
-        # Dự đoán xác suất của từng lớp nhãn
+
         probabilities = model.predict_proba(features)[0]
         class_0_prob = probabilities[0] * 100
         class_1_prob = probabilities[1] * 100
